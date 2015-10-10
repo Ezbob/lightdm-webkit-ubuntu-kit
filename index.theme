@@ -1,0 +1,6 @@
+[theme]
+name=ubuntu-kit-session
+description=Ubuntu-kit logon
+engine=lightdm-webkit-greeter
+url=index.html
+session=lxqt
