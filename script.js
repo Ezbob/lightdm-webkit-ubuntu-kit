@@ -168,27 +168,14 @@ function isVisible(element) {
 function update_time() {
   var time = document.querySelector("#current_time");
   var date = new Date();
-
-  var hh = date.getHours();
-  var mm = date.getMinutes();
-  var ss = date.getSeconds();
-  //var suffix= "AM";
-  //if (hh > 12) { // PM and AM clock
-  //  hh = hh - 12;
-  //  suffix = "PM";
-  //}
-  if (hh < 10) { hh = "0"+hh; }
-  if (mm < 10) { mm = "0"+mm; }
-  if (ss < 10) { ss = "0"+ss; }
-  time.innerHTML = hh + ":" + mm; // + " " + suffix;
+  time.innerHTML = date.toLocaleTimeString(navigator.language, 
+    {hour: '2-digit', minute:'2-digit'});
 }
 
 function set_current_date() {
   var date = document.querySelector("#current_date");
   var curDate = new Date();
-  var day = (curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate() + "");
-  var month = (curDate.getMonth() < 10 ? "0" + curDate.getMonth() : curDate.getDate() + "");
-  date.innerHTML = day + "-" + month + "-" + curDate.getFullYear()
+  date.innerHTML = curDate.toLocaleDateString(navigator.language);
 }
 
 //////////////////////////////////
