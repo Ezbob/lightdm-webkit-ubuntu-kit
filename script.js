@@ -165,14 +165,14 @@ function isVisible(element) {
   return !element.classList.contains("hidden");
 }
 
-function update_time() {
+function updateTime() {
   var time = document.querySelector("#current_time");
   var date = new Date();
   time.innerHTML = date.toLocaleTimeString(navigator.language, 
     {hour: '2-digit', minute:'2-digit'});
 }
 
-function set_current_date() {
+function updateDate() {
   var date = document.querySelector("#current_date");
   var curDate = new Date();
   date.innerHTML = curDate.toLocaleDateString(navigator.language);
@@ -222,13 +222,13 @@ function initialize_users() {
 }
 
 function initialize_timer() {
-  update_time();
-  setInterval(update_time, 1000);
+  updateTime();
+  setInterval(updateTime, 1000);
 }
 
 function initialize_date() {
-  set_current_date();
-  setInterval(set_current_date, 1000);
+  updateDate();
+  setInterval(updateDate, 1000);
 }
 
 function add_action(id, name, image, clickhandler, template, parent) {
