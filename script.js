@@ -165,17 +165,24 @@ function isVisible(element) {
   return !element.classList.contains("hidden");
 }
 
-function updateTime() {
+function update_time() {
   var time = document.querySelector("#current_time");
   var date = new Date();
-  time.innerHTML = date.toLocaleTimeString(navigator.language, 
-    {hour: '2-digit', minute:'2-digit'});
+  var time_string = date.toTimeString().split(" ", 2);
+  // toTimeString() gives time and then the PM/AM surfix when using 12h clock, otherwise we get time and timezone + offset
+  if ( time_string[1] === "PM" || time_string[1] === "AM" ) {
+      time_string = time_string.join(" ");
+  } else {
+      time_string = time_string[0];
+  }
+
+  time.innerHTML = time_string;
 }
 
-function updateDate() {
+function update_date() {
   var date = document.querySelector("#current_date");
   var curDate = new Date();
-  date.innerHTML = curDate.toLocaleDateString(navigator.language);
+  date.innerHTML = curDate.toLocaleDateString();
 }
 
 //////////////////////////////////
@@ -222,13 +229,13 @@ function initialize_users() {
 }
 
 function initialize_timer() {
-  updateTime();
-  setInterval(updateTime, 1000);
+  update_time();
+  setInterval(update_time, 1000);
 }
 
 function initialize_date() {
-  updateDate();
-  setInterval(updateDate, 1000);
+  update_date();
+  setInterval(update_date, 1000);
 }
 
 function add_action(id, name, image, clickhandler, template, parent) {
