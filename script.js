@@ -118,6 +118,7 @@ function initialize_sessions() {
     console.log(s, session);
     label.innerHTML = session.name;
     radio.value = session.key;
+    radio.id = session.key;
 
     var default_session = 'default' == lightdm.default_session && 0 == i;
     if (session.key === lightdm.default_session || default_session) {
@@ -125,6 +126,13 @@ function initialize_sessions() {
     }
 
     container.appendChild(s);
+  }
+}
+
+function update_sessions(user_session) {
+  var radio = document.getElementById(user_session);
+  if ( radio !== null) {
+    radio.checked = true;
   }
 }
 
@@ -146,6 +154,12 @@ function user_clicked(event) {
     show_users();
   } else {
     selected_user = event.currentTarget.id;
+    for (i = 0; i < lightdm.users.length; i++) {
+      user = lightdm.users[i];
+      if (user.name === selected_user) {
+        update_sessions(user.session);
+      }
+    }
     start_authentication(event.currentTarget.id);
   }
   show_message("");
